@@ -5,22 +5,22 @@ Comparison of food prices and average income over time in the Czech Republic.
 
 The output consists of two database tables containing the necessary data to address these questions:
 
-	1. Over the years, are wages rising in all industries, or falling in some?
+   1. Over the years, are wages rising in all industries, or falling in some?
 
-	2. How many liters of milk and kilograms of bread can be bought in the first and last comparable periods in the available price 	and wage data?
+   2. How many liters of milk and kilograms of bread can be bought in the first and last comparable periods in the available price 	and wage data?
 
-	3. Which food category is increasing in price the slowest (it has the lowest percentage year-on-year increase)?
+   3. Which food category is increasing in price the slowest (it has the lowest percentage year-on-year increase)?
 
-	4. Has there been a year in which the year-on-year increase in food prices was significantly higher than wage growth (greater than 	10%)?
+   4. Has there been a year in which the year-on-year increase in food prices was significantly higher than wage growth (greater than 	10%)?
 
-	5. Does the level of GDP affect changes in wages and food prices? In other words, if the GDP increases significantly in one year, 	it will be reflected in food prices or wages in the same or the following year by more significant growth? 
+   5. Does the level of GDP affect changes in wages and food prices? In other words, if the GDP increases significantly in one year, it 	will be reflected in food prices or wages in the same or the following year by more significant growth? 
 
 ### Procedure
 The first step involved creating tables with relevant data, which will be used to answer questions. The data was organized into two database tables: the primary table containing information on wages and food prices in the Czech Republic from 2006 until 2018, and the secondary table containing data on GDP, GINI coefficient, and population of other European countries from 2006 until 2018.
 
 The second step consisted of querying to retrieve relevant data on food prices and average income in the Czech Republic over time.
 
-#### Results
+## Results
 1. In summary, all sectors experienced an overall increasing trend over the years. While the majority of sectors saw a rise in wages over time, there were occasional decreases noted in particular industries during certain years. 
    There are two sectors, Manufacturing (C) and Human Health and Social Work Activities (Q), which both experienced consistent wage increases from 2006 to 2018. However, sectors like Mining and Quarrying (B), as well as Electricity, Gas, Steam, and Air Conditioning Supply (D), displayed more fluctuation than other sectors, with periods of both growth and decline in wages probably due to factors like market demand or resource availability.    
 	
