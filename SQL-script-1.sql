@@ -8,8 +8,8 @@ WITH avg_salary AS (
         industry_branch_code,
 		name,
     	payroll_year,
-        ROUND(AVG(averagea_value), 2) AS avg_salary, -- děleno počtem čtvrdletí, aby byl spočten průměr kvartálních průměrů
-        LAG(ROUND(AVG(averagea_value), 2)) OVER (PARTITION BY industry_branch_code ORDER BY payroll_year) AS prev_year_avg_salary
+        ROUND(AVG(average_value), 2) AS avg_salary, -- děleno počtem čtvrdletí, aby byl spočten průměr kvartálních průměrů
+        LAG(ROUND(AVG(average_value), 2)) OVER (PARTITION BY industry_branch_code ORDER BY payroll_year) AS prev_year_avg_salary
     FROM
         t_alena_morgan_project_SQL_primary_final
     WHERE

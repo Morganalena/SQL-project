@@ -18,24 +18,23 @@ WITH GDP_data AS (
 ),
 avg_y_salary AS (
     SELECT
-        AVG(averagea_value) AS avg_salary,
+        AVG(average_value) AS avg_salary,
         payroll_year 
     FROM
         t_alena_morgan_project_sql_primary_final
     WHERE
-        averagea_value IS NOT NULL
+        average_value IS NOT NULL
     GROUP BY
         payroll_year
 ),
 avg_y_product_value AS (
     SELECT
-        avg(product_value) AS avg_product_value,
+        AVG(product_value) AS avg_product_value,
         date_format(date_from, '%Y') AS year
     FROM
         t_alena_morgan_project_sql_primary_final
-    WHERE
-        region_code IS NULL 
-        AND product_value IS NOT NULL
+    WHERE 
+        product_value IS NOT NULL
     GROUP BY
         year
 ),
@@ -45,12 +44,12 @@ y_changes AS (
 		gdpd.GDP,
 		ays.avg_salary,
 		aypv.avg_product_value,
-		round(((gdpd.GDP - LAG(gdpd.GDP) OVER (ORDER BY gdpd.year)) / LAG(gdpd.GDP) 
-			OVER (ORDER BY gdpd.year) * 100), 1) AS gdp_growth,
-	    round(((ays.avg_salary - LAG(ays.avg_salary) OVER (ORDER BY ays.payroll_year)) / LAG(ays.avg_salary) 
-	    	OVER (ORDER BY ays.payroll_year) * 100), 1) AS salary_growth,
-	    round(((aypv.avg_product_value - LAG(aypv.avg_product_value) 
-	    	OVER (ORDER BY aypv.year)) / LAG(aypv.avg_product_value) OVER (ORDER BY aypv.year) * 100), 1) AS food_price_increase
+		ROUND(((gdpd.GDP - LAG(gdpd.GDP) OVER (ORDER BY gdpd.year)) / LAG(gdpd.GDP) 
+		OVER (ORDER BY gdpd.year) * 100), 1) AS gdp_growth,
+	    ROUND(((ays.avg_salary - LAG(ays.avg_salary) OVER (ORDER BY ays.payroll_year)) / LAG(ays.avg_salary) 
+	    OVER (ORDER BY ays.payroll_year) * 100), 1) AS salary_growth,
+	    ROUND(((aypv.avg_product_value - LAG(aypv.avg_product_value) 
+	    OVER (ORDER BY aypv.year)) / LAG(aypv.avg_product_value) OVER (ORDER BY aypv.year) * 100), 1) AS food_price_increase
 	FROM GDP_data gdpd
 	LEFT JOIN avg_y_salary ays
 		ON gdpd.year = ays.payroll_year

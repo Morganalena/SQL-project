@@ -4,12 +4,12 @@
 */
 WITH average_product_value AS (
 	SELECT
-		avg(product_value) AS a_value,
+		AVG(product_value) AS a_value,
 		category_code,
 		category_name,
-		date_format(date_from, '%Y') AS date_from1
+		YEAR(date_from) AS date_from1
 	FROM t_alena_morgan_project_sql_primary_final tampspf 
-	WHERE region_code IS NULL 
+	WHERE 1=1 
 		AND product_value IS NOT NULL
 	GROUP BY category_code, date_from1 
 	ORDER BY category_code, date_from1
@@ -21,12 +21,12 @@ yoy_increase AS (
 	    apv.date_from1,
 	    apv.a_value,
 	    (apv.a_value - LAG(apv.a_value) 
-	    	OVER (PARTITION BY apv.category_code ORDER BY apv.date_from1)) / LAG(apv.a_value) 
-	    	OVER (PARTITION BY apv.category_code ORDER BY apv.date_from1) * 100 AS year_over_year_increase
+	    OVER (PARTITION BY apv.category_code ORDER BY apv.date_from1)) / LAG(apv.a_value) 
+	    OVER (PARTITION BY apv.category_code ORDER BY apv.date_from1) * 100 AS year_over_year_increase
 	FROM average_product_value apv
 )
 SELECT
-    round(avg(year_over_year_increase),1) AS average_yoy_increase, -- results IN %
+    ROUND(AVG(year_over_year_increase),1) AS average_yoy_increase, -- results IN %
 	category_name
 FROM
     yoy_increase yi
